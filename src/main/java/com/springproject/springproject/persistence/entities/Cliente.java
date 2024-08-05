@@ -35,7 +35,7 @@ public class Cliente {
     private String telefono;
 
     @ManyToOne
-    @JoinColumn(name = "id_ciudad")
+    @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad")
     private Ciudad ciudad;
 
     @ManyToOne
@@ -132,20 +132,20 @@ public class Cliente {
         this.limiteCredito = limiteCredito;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-               "id_cliente=" + idCliente +
-               ", nombre_cliente='" + nombreCliente + '\'' +
-               ", nombre_contacto='" + nombreContacto + '\'' +
-               ", apellido_contacto='" + apellidoContacto + '\'' +
-               ", fax='" + fax + '\'' +
-               ", telefono='" + telefono + '\'' +
-               ", ciudad=" + (ciudad != null ? ciudad.getIdCiudad() : null) +
-               ", direccion=" + (direccion != null ? direccion.getIdDireccion() : null) +
-               ", empleadoRepVentas=" + (empleadoRepVentas != null ? empleadoRepVentas.getIdEmpleado() : null) +
-               ", limite_credito=" + limiteCredito +
-               '}';
-    }
+    // @Override
+    // public String toString() {
+    //     return "Cliente{" +
+    //            "id_cliente=" + idCliente +
+    //            ", nombre_cliente='" + nombreCliente + '\'' +
+    //            ", nombre_contacto='" + nombreContacto + '\'' +
+    //            ", apellido_contacto='" + apellidoContacto + '\'' +
+    //            ", fax='" + fax + '\'' +
+    //            ", telefono='" + telefono + '\'' +
+    //            ", ciudad=" + (ciudad != null ? ciudad.getIdCiudad() : null) +
+    //            ", direccion=" + (direccion != null ? direccion.getIdDireccion() : null) +
+    //            ", empleadoRepVentas=" + (empleadoRepVentas != null ? empleadoRepVentas.getIdEmpleado() : null) +
+    //            ", limite_credito=" + limiteCredito +
+    //            '}';
+    // }
 }
 

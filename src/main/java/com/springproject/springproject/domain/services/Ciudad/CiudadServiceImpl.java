@@ -7,11 +7,13 @@ import com.springproject.springproject.persistence.repositories.CiudadRepository
 
 import jakarta.persistence.EntityNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CiudadServiceImpl implements CiudadService {
 
+    @Autowired
     private final CiudadRepository ciudadRepository;
 
     public CiudadServiceImpl(CiudadRepository ciudadRepository) {
@@ -20,7 +22,7 @@ public class CiudadServiceImpl implements CiudadService {
 
     @Override
     public List<Ciudad> findAll() {
-        return ciudadRepository.findAll();
+        return (List<Ciudad>) ciudadRepository.findAll();
     }
 
     @Override

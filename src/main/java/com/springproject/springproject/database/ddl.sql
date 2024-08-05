@@ -1,3 +1,5 @@
+
+
 CREATE TABLE pais (
     id_pais INT(5) PRIMARY KEY,
     nombre_pais VARCHAR(50)

@@ -1,10 +1,12 @@
 package com.springproject.springproject.domain.services.Cliente;
 
+import com.springproject.springproject.domain.dto.ClienteDTO;
 import com.springproject.springproject.persistence.entities.Cliente;
 import com.springproject.springproject.persistence.repositories.ClienteRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +16,8 @@ import java.util.Optional;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
-    private final ClienteRepository clienteRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     public ClienteServiceImpl(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
