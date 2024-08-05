@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Ciudad</title>
+</head>
+<body>
+    <h1 th:text="${ciudad.idCiudad == null ? 'Nueva Ciudad' : 'Editar Ciudad'}"></h1>
+    <form th:action="@{/ciudades/guardar}" th:object="${ciudad}" method="post">
+        <input type="hidden" th:field="*{idCiudad}"/>
+
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombreCiudad}" required/>
+        <br/>
+        <label>Código Postal:</label>
+        <input type="text" th:field="*{codigoPostal}" required/>
+        <br/>
+        <label>País:</label>
+        <select th:field="*{pais.idPais}">
+            <option th:each="pais : ${paises}" th:value="${pais.idPais}" th:text="${pais.nombre}"></option>
+        </select>
+        <br/>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="/ciudades">Volver a la lista</a>
+</body>
+</html>
