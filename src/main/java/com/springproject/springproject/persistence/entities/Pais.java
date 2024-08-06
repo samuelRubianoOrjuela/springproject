@@ -27,11 +27,11 @@ public class Pais {
     public Pais() {
     }
 
-    public Long getId() {
+    public Long getIdPais() {
         return idPais;
     }
 
-    public void setId(Long idPais) {
+    public void setIdPais(Long idPais) {
         this.idPais = idPais;
     }
 

@@ -9,15 +9,17 @@ import com.springproject.springproject.persistence.entities.Empleado;
 import com.springproject.springproject.persistence.entities.Cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 // import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,48 +41,36 @@ public class ClienteController {
         this.empleadoService = empleadoService;
     }
 
-    @GetMapping("formulario/{id}")
-    public Optional<Cliente> formulario(@PathVariable Long id) {
-        return clienteService.findById(id);
+    @GetMapping("/formulario/{id}")
+    public ResponseEntity<Cliente> formulario(@PathVariable Long id) {
+        Optional<Cliente> cliente = clienteService.findById(id);
+        return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute Cliente cliente) {
+    public ResponseEntity<Void> guardar(@RequestBody Cliente cliente) {
         clienteService.save(cliente);
-        return "redirect:/clientes";
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/actualizar/{id}")
-    public String actualizarCliente(@PathVariable Long id, @ModelAttribute Cliente cliente) {
+    public ResponseEntity<Void> actualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         cliente.setIdCliente(id);
         clienteService.update(id, cliente);
-        return "redirect:/clientes";
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<ClienteDTO>> listarClientes() {
         List<Cliente> clientes = clienteService.findAll();
-        List<ClienteDTO> clientesDTO = clientes.stream()
-                                           .map(cliente -> new ClienteDTO(cliente))
-                                           .collect(Collectors.toList());
+        List<ClienteDTO> clientesDTO = clientes.stream().map(cliente -> new ClienteDTO(cliente)).collect(Collectors.toList());
         return ResponseEntity.ok(clientesDTO);
     }
 
-    @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
-        Cliente cliente = clienteService.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con id " + id));
-        List<Ciudad> ciudades = ciudadService.findAll();
-        List<Empleado> empleados = empleadoService.findAll();
-        model.addAttribute("cliente", cliente);
-        model.addAttribute("ciudades", ciudades);
-        model.addAttribute("empleados", empleados);
-        return "clientes/cliente-form";
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminarCliente(@PathVariable Long id) {
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id) {
         clienteService.delete(id);
-        return "redirect:/clientes";
+        return ResponseEntity.noContent().build();
     }
 }
 

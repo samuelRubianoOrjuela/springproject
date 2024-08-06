@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CiudadServiceImpl implements CiudadService {
@@ -36,6 +37,7 @@ public class CiudadServiceImpl implements CiudadService {
     }
 
     @Override
+    @Transactional
     public Ciudad update(Long id, Ciudad ciudad) {
         if (!ciudadRepository.existsById(id)) {
             throw new EntityNotFoundException("Ciudad no encontrada con id " + id);
@@ -45,6 +47,7 @@ public class CiudadServiceImpl implements CiudadService {
     }
 
     @Override
+    @Transactional
     public Optional<Ciudad> delete(Long id) {
         Optional<Ciudad> ciudad = ciudadRepository.findById(id);
         if (ciudad.isPresent()) {

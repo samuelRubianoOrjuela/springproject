@@ -80,8 +80,8 @@ public class Oficina {
     public Ciudad getCiudad() {
         return ciudad;
     }
-
-    public void setCiudad(Ciudad ciudad) {
+    
+    public void setIdCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 

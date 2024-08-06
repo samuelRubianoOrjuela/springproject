@@ -71,7 +71,7 @@ public class Ciudad {
     // @Override
     // public String toString() {
     //     return "Ciudad{id_ciudad=" + idCiudad + ", nombre_ciudad=" + nombreCiudad + ", codigo_postal=" + codigoPostal + "}";
-    // }
+    //  }
 
 }
 

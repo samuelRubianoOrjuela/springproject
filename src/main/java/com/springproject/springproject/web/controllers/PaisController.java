@@ -1,13 +1,18 @@
 package com.springproject.springproject.web.controllers;
 
 import com.springproject.springproject.domain.services.Pais.PaisService;
+import com.springproject.springproject.domain.dto.PaisDTO;
 import com.springproject.springproject.persistence.entities.Pais;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/paises")
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/pais")
 public class PaisController {
 
     private final PaisService paisService;
@@ -17,40 +22,43 @@ public class PaisController {
     }
 
     @GetMapping
-    public String listarPaises(Model model) {
-        model.addAttribute("paises", paisService.findAll());
-        return "paises/lista";
+    public ResponseEntity<List<PaisDTO>> listarPaises() {
+        List<Pais> paises = paisService.findAll();
+        List<PaisDTO> paisesDTO = paises.stream().map(PaisDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(paisesDTO);
     }
 
-    @GetMapping("/nuevo")
-    public String mostrarFormularioDeCreacion(Model model) {
-        model.addAttribute("pais", new Pais());
-        return "paises/formulario";
+    @GetMapping("/pais/{id}")
+    public ResponseEntity<PaisDTO> obtenerPais(@PathVariable Long id) {
+        Optional<Pais> pais = paisService.findById(id);
+        return pais.map(p -> ResponseEntity.ok(new PaisDTO(p))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/guardar")
-    public String guardarPais(@ModelAttribute Pais pais) {
-        paisService.save(pais);
-        return "redirect:/paises";
+    @PostMapping("/nuevo")
+    public ResponseEntity<PaisDTO> crearPais(@RequestBody Pais pais) {
+        Pais nuevoPais = paisService.save(pais);
+        return ResponseEntity.status(201).body(new PaisDTO(nuevoPais));
     }
 
-    @GetMapping("/editar/{id}")
-    public String mostrarFormularioDeEdicion(@PathVariable Long id, Model model) {
-        Pais pais = paisService.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("País no encontrado con id " + id));
-        model.addAttribute("pais", pais);
-        return "paises/formulario";
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<PaisDTO> actualizarPais(@PathVariable Long id, @RequestBody Pais pais) {
+        if (paisService.findById(id).isPresent()) {
+            pais.setIdPais(id);
+            Pais paisActualizado = paisService.update(id, pais);
+            return ResponseEntity.ok(new PaisDTO(paisActualizado));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PostMapping("/actualizar/{id}")
-    public String actualizarPais(@PathVariable Long id, @ModelAttribute Pais pais) {
-        paisService.update(id, pais);
-        return "redirect:/paises";
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminarPais(@PathVariable Long id) {
-        paisService.delete(id);
-        return "redirect:/paises";
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarPais(@PathVariable Long id) {
+        if (paisService.findById(id).isPresent()) {
+            paisService.delete(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
+
