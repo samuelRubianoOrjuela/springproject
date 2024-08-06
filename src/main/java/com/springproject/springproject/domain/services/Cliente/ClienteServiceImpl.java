@@ -1,6 +1,5 @@
 package com.springproject.springproject.domain.services.Cliente;
 
-import com.springproject.springproject.domain.dto.ClienteDTO;
 import com.springproject.springproject.persistence.entities.Cliente;
 import com.springproject.springproject.persistence.repositories.ClienteRepository;
 

@@ -2,10 +2,7 @@ package com.springproject.springproject.domain.dto;
 
 import java.math.BigDecimal;
 
-import com.springproject.springproject.persistence.entities.Ciudad;
 import com.springproject.springproject.persistence.entities.Cliente;
-import com.springproject.springproject.persistence.entities.Direccion;
-import com.springproject.springproject.persistence.entities.Empleado;
 
 
 public class ClienteDTO {

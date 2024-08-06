@@ -4,18 +4,14 @@ import com.springproject.springproject.domain.dto.ClienteDTO;
 import com.springproject.springproject.domain.services.Ciudad.CiudadService;
 import com.springproject.springproject.domain.services.Empleado.EmpleadoService;
 import com.springproject.springproject.domain.services.Cliente.ClienteService;
-import com.springproject.springproject.persistence.entities.Ciudad;
-import com.springproject.springproject.persistence.entities.Empleado;
 import com.springproject.springproject.persistence.entities.Cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 // import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
