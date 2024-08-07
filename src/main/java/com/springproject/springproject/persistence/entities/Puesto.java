@@ -21,11 +21,11 @@ public class Puesto {
 
     public Puesto(){}
 
-    public Long getId() {
+    public Long getIdPuesto() {
         return idPuesto;
     }
 
-    public void setId(Long idPuesto) {
+    public void setIdPuesto(Long idPuesto) {
         this.idPuesto = idPuesto;
     }
 

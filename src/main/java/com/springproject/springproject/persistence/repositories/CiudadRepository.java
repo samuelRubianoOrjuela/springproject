@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.springproject.springproject.persistence.entities.Ciudad;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface CiudadRepository extends JpaRepository<Ciudad, Long> {
 

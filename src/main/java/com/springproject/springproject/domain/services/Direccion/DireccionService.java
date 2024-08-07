@@ -11,6 +11,6 @@ public interface DireccionService {
     Optional<Direccion> findById(Long id);
     Direccion save(Direccion direccion);
     Direccion update(Long id, Direccion direccion);
-    Optional<Direccion> delete(Long id);
+    void delete(Long id);
     
 }

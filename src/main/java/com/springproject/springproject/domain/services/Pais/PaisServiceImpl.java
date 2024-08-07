@@ -14,6 +14,7 @@ public class PaisServiceImpl implements PaisService {
     private final PaisRepository paisRepository;
     private final CiudadRepository ciudadRepository;
 
+
     public PaisServiceImpl(PaisRepository paisRepository, CiudadRepository ciudadRepository) {
         this.paisRepository = paisRepository;
         this.ciudadRepository = ciudadRepository;
@@ -45,6 +46,8 @@ public class PaisServiceImpl implements PaisService {
         }
     }
 
+    // ESTO SE USA PARA BORRAR Y NO TENER INCONVENIENTES CON LA LLAVE FORANEA
+
     @Override
     @Transactional
     public Optional<Pais> delete(Long id) {
@@ -52,8 +55,6 @@ public class PaisServiceImpl implements PaisService {
         if (pais.isPresent()) {
             ciudadRepository.setPaisToNullById(id);
             paisRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Pais no encontrado con id " + id);
         }
         return pais;
     }

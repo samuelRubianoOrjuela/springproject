@@ -80,7 +80,6 @@ CREATE TABLE direccion (
     linea_direccion1 VARCHAR(50),
     linea_direccion2 VARCHAR(50), 
     id_ciudad INT(5),
-    id_region INT(5),
     CONSTRAINT FK_id_ciudad_direccion_cliente FOREIGN KEY (id_ciudad) REFERENCES ciudad(id_ciudad),
     CONSTRAINT FK_id_cliente_direccion_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
