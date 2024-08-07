@@ -52,6 +52,7 @@ public class OficinaServiceImpl implements OficinaService{
     public Optional<Oficina> delete(Long id) {
         Optional<Oficina> oficina = oficinaRepository.findById(id);
         if (oficina.isPresent()) {
+            oficinaRepository.setEmpleadoNull(id);  
             oficinaRepository.deleteById(id);
         }
         return oficina;
