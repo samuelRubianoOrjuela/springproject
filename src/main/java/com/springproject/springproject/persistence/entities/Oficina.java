@@ -18,9 +18,6 @@ public class Oficina {
     @Column(name = "id_oficina")
     private Long idOficina;
 
-    @Column(name = "nombre_pais")
-    private String nombrePais;
-
     @Column(name = "telefono")
     private String telefono;
 
@@ -41,14 +38,6 @@ public class Oficina {
 
     public void setIdOficina(Long idOficina) {
         this.idOficina = idOficina;
-    }
-
-    public String getNombrePais() {
-        return nombrePais;
-    }
-
-    public void setNombrePais(String nombrePais) {
-        this.nombrePais = nombrePais;
     }
 
     public String getTelefono() {
@@ -89,6 +78,6 @@ public class Oficina {
 
     @Override
     public String toString() {
-        return "Oficina{" + "id_oficina='" + idOficina + '\'' + ", nombre_pais='" + nombrePais + '\'' + ", telefono='" + telefono + '\'' + ", linea_direccion1='" + lineaDireccion1 + '\'' + ", linea_direccion2='" + lineaDireccion2 + '\'' + ", ciudad=" + ciudad +'}';
+        return "Oficina{" + "id_oficina='" + idOficina + '\'' + '\'' + ", telefono='" + telefono + '\'' + ", linea_direccion1='" + lineaDireccion1 + '\'' + ", linea_direccion2='" + lineaDireccion2 + '\'' + ", ciudad=" + ciudad +'}';
     }
 }

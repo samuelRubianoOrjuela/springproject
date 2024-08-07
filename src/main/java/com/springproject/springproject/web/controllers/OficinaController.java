@@ -77,7 +77,7 @@ public class OficinaController {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/eliminar/{id}")    
     public ResponseEntity<Void> eliminarOficina(@PathVariable Long id) {
         if (oficinaService.findById(id).isPresent()) {
             oficinaService.delete(id);
