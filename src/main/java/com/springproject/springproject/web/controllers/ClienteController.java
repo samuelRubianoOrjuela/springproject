@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("clientes")
+@RequestMapping("cliente")
 public class ClienteController {
 
     @Autowired
@@ -45,6 +45,9 @@ public class ClienteController {
 
     @PostMapping("/guardar")
     public ResponseEntity<Void> guardar(@RequestBody Cliente cliente) {
+        if (ciudadService.findById(cliente.getCiudad().getIdCiudad()).isEmpty() || empleadoService.findById(cliente.getEmpleadoRepVentas().getIdEmpleado()).isEmpty()) {
+            return ResponseEntity.badRequest().build(); 
+        }
         clienteService.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

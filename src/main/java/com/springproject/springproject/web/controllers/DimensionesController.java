@@ -20,7 +20,7 @@ import com.springproject.springproject.persistence.entities.Dimensiones;
 
 
 @RestController
-@RequestMapping("/dimensiones")
+@RequestMapping("/dimension")
 public class DimensionesController {
 
     private final DimensionesService dimensionesService;

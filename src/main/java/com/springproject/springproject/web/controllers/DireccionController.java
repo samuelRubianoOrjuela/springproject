@@ -48,7 +48,6 @@ public class DireccionController {
 
         Direccion direccion = new Direccion();
         direccion.setIdDireccion(direccionDTO.getIdDireccion());
-        // direccion.setCliente(direccionDTO.getIdCliente() != null ? clienteService.findById(direccionDTO.getIdCliente()).orElse(null) : null);
         direccion.setTipoDireccion(direccionDTO.getTipoDireccion());
         direccion.setDireccion(direccionDTO.getDireccion());
         direccion.setDescripcion(direccionDTO.getDescripcion());
