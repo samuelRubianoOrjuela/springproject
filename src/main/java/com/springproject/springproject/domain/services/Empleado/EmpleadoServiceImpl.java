@@ -53,6 +53,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public Optional<Empleado> delete(Long id){
         Optional<Empleado> empleado = empleadoRepository.findById(id);
         if (empleado.isPresent()){
+            empleadoRepository.setEmpleadoNull(id);
+            empleadoRepository.setJefeNull(id);
             empleadoRepository.deleteById(id);
         } else {
             throw new EntityNotFoundException("El empleado con id" + id + "no fue encontrado");

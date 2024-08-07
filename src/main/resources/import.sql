@@ -11,14 +11,14 @@ INSERT INTO oficina (id_oficina, id_ciudad, telefono, linea_direccion1, linea_di
 INSERT INTO puesto (id_puesto, nombre_puesto) VALUES (1, 'Gerente');
 INSERT INTO puesto (id_puesto, nombre_puesto) VALUES (2, 'Asistente');
 
-INSERT INTO empleado (id_empleado, nombre, apellido1, apellido2, extension, email, id_oficina, id_jefe, id_puesto) VALUES (1, 'Juan', 'Pérez', 'Gómez', '123', 'juan.perez@example.com', 1, NULL, 1);
+INSERT INTO empleado (id_empleado, nombre, apellido1, apellido2, extension, email, id_oficina, id_jefe, id_puesto) VALUES (1, 'Juan', 'Pérez', 'Gómez', '123', 'juan.perez@example.com', 1, 2, 1);
 INSERT INTO empleado (id_empleado, nombre, apellido1, apellido2, extension, email, id_oficina, id_jefe, id_puesto) VALUES (2, 'Ana', 'García', 'Martínez', '124', 'ana.garcia@example.com', 1, 1, 2);
 
 INSERT INTO direccion (id_direccion, tipo_direccion, direccion, descripcion, linea_direccion1, linea_direccion2, id_ciudad) VALUES(1, 'Oficina', 'Calle Falsa 123', 'Oficina principal', 'Calle Falsa 123', 'Apto 4B', 1);
 INSERT INTO direccion (id_direccion, tipo_direccion, direccion, descripcion, linea_direccion1, linea_direccion2, id_ciudad) VALUES(2, 'Sucursal', 'Avenida Paulista 1000', 'Sucursal principal', 'Avenida Paulista 1000', NULL, 2);
 
-INSERT INTO cliente (id_cliente, nombre_cliente, nombre_contacto, apellido_contacto, fax, telefono, id_ciudad, id_direccion, id_empleado_rep_ventas, limite_credito) VALUES (1, 'Cliente A', 'Luis', 'Fernández', '1234', '5678', 1, 1, 1, 10000.00);
-INSERT INTO cliente (id_cliente, nombre_cliente, nombre_contacto, apellido_contacto, fax, telefono, id_ciudad, id_direccion, id_empleado_rep_ventas, limite_credito) VALUES (2, 'Cliente B', 'Marta', 'López', '5678', '1234', 2, 2, 2, 20000.00);
+INSERT INTO cliente (id_cliente, nombre_contacto, nombre_cliente, apellido_cliente, email, fax, telefono, id_ciudad, id_direccion, id_empleado_rep_ventas, limite_credito) VALUES (1, 'Cliente Atra', 'Luis', 'Fernández', 'luisfernandez@ejemplo.com', '1234', '5678', 1, 1, 1, 10000.00);
+INSERT INTO cliente (id_cliente, nombre_contacto, nombre_cliente, apellido_cliente, email, fax, telefono, id_ciudad, id_direccion, id_empleado_rep_ventas, limite_credito) VALUES (2, 'Cliente Travelo', 'Marta', 'López', 'Martalopez@ejemplo.com', '5678', '1234', 2, 2, 2, 20000.00);
 
 INSERT INTO forma_pago (id_forma_pago, nombre_forma_pago) VALUES (1, 'Tarjeta de Crédito');
 INSERT INTO forma_pago (id_forma_pago, nombre_forma_pago) VALUES (2, 'Transferencia Bancaria');

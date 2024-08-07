@@ -70,7 +70,7 @@ public class Oficina {
         return ciudad;
     }
     
-    public void setIdCiudad(Ciudad ciudad) {
+    public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 

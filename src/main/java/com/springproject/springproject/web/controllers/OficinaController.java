@@ -50,7 +50,7 @@ public class OficinaController {
         oficina.setTelefono(oficinaDTO.getTelefono());
         oficina.setLineaDireccion1(oficinaDTO.getLineaDireccion1());
         oficina.setLineaDireccion2(oficinaDTO.getLineaDireccion2());
-        oficina.setIdCiudad(ciudadOpt.get());
+        oficina.setCiudad(ciudadOpt.get());
 
         Oficina nuevaOficina = oficinaService.save(oficina);
         return ResponseEntity.status(HttpStatus.CREATED).body(new OficinaDTO(nuevaOficina));
@@ -68,7 +68,7 @@ public class OficinaController {
             oficina.setTelefono(oficinaDTO.getTelefono());
             oficina.setLineaDireccion1(oficinaDTO.getLineaDireccion1());
             oficina.setLineaDireccion2(oficinaDTO.getLineaDireccion2());
-            oficina.setIdCiudad(ciudadOpt.get());
+            oficina.setCiudad(ciudadOpt.get());
 
             Oficina oficinaActualizada = oficinaService.save(oficina);
             return ResponseEntity.ok(new OficinaDTO(oficinaActualizada));

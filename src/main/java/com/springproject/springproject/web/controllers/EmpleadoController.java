@@ -2,6 +2,7 @@ package com.springproject.springproject.web.controllers;
 
 import com.springproject.springproject.domain.dto.EmpleadoDTO;
 import com.springproject.springproject.domain.services.Empleado.EmpleadoService;
+import com.springproject.springproject.domain.services.Oficina.OficinaService;
 import com.springproject.springproject.domain.services.Puesto.PuestoService;
 import com.springproject.springproject.persistence.entities.Empleado;
 
@@ -21,11 +22,13 @@ public class EmpleadoController {
 
     private final EmpleadoService empleadoService;
     private final PuestoService puestoService;
+    private final OficinaService oficinaService;
 
 
-    public EmpleadoController(EmpleadoService empleadoService, PuestoService puestoService) {
+    public EmpleadoController(EmpleadoService empleadoService, PuestoService puestoService, OficinaService oficinaService) {
         this.empleadoService = empleadoService;
         this.puestoService = puestoService;
+        this.oficinaService = oficinaService;
     }
 
     @GetMapping
@@ -50,7 +53,7 @@ public class EmpleadoController {
         empleado.setApellido2(empleadoDTO.getApellido2());
         empleado.setExtension(empleadoDTO.getExtension());
         empleado.setEmail(empleadoDTO.getEmail());
-        empleado.setIdOficina(empleadoDTO.getIdOficina());
+        empleado.setOficina(empleadoDTO.getIdOficina() != null ? oficinaService.findById(empleadoDTO.getIdOficina()).orElse(null) : null);
         empleado.setJefe(empleadoDTO.getIdJefe() != null ? empleadoService.findById(empleadoDTO.getIdJefe()).orElse(null) : null);
         empleado.setPuesto(empleadoDTO.getIdPuesto() != null ? puestoService.findById(empleadoDTO.getIdPuesto()).orElse(null) : null);
 
@@ -68,7 +71,7 @@ public class EmpleadoController {
             empleado.setApellido2(empleadoDTO.getApellido2());
             empleado.setExtension(empleadoDTO.getExtension());
             empleado.setEmail(empleadoDTO.getEmail());
-            empleado.setIdOficina(empleadoDTO.getIdOficina());
+            empleado.setOficina(empleadoDTO.getIdOficina() != null ? oficinaService.findById(empleadoDTO.getIdOficina()).orElse(null) : null);
             empleado.setJefe(empleadoDTO.getIdJefe() != null ? empleadoService.findById(empleadoDTO.getIdJefe()).orElse(null) : null);
             empleado.setPuesto(empleadoDTO.getIdPuesto() != null ? puestoService.findById(empleadoDTO.getIdPuesto()).orElse(null) : null);
 

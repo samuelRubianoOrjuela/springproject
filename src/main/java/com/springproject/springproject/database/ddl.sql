@@ -54,8 +54,8 @@ CREATE TABLE empleado (
 CREATE TABLE cliente (
     id_cliente INT(11) PRIMARY KEY,
     nombre_cliente VARCHAR(50),
-    nombre_contacto VARCHAR(30),
     apellido_contacto VARCHAR(30),
+    email VARCHAR,
     fax VARCHAR(15),
     telefono VARCHAR(15),
     id_ciudad INT (5),
@@ -63,6 +63,7 @@ CREATE TABLE cliente (
     id_empleado_rep_ventas INT (11),
     limite_credito DECIMAL(15,2),
     CONSTRAINT FK_id_ciudad FOREIGN KEY (id_ciudad) REFERENCES ciudad(id_ciudad),
+    CONSTRAINT FK_id_direccion FOREIGN KEY (id_direccion) REFERENCES direccion(id_direccion),
     CONSTRAINT FK_id_rep_ventas FOREIGN KEY (id_empleado_rep_ventas) REFERENCES empleado(id_empleado)
 );
 

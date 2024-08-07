@@ -19,14 +19,17 @@ public class Cliente {
     @Column(name = "id_cliente")
     private Long idCliente;
 
-    @Column(name = "nombre_cliente")
-    private String nombreCliente;
-
     @Column(name = "nombre_contacto")
     private String nombreContacto;
 
-    @Column(name = "apellido_contacto")
-    private String apellidoContacto;
+    @Column(name = "nombre_cliente")
+    private String nombreCliente;
+
+    @Column(name = "apellido_cliente")
+    private String apellidoCliente;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "fax")
     private String fax;
@@ -39,11 +42,11 @@ public class Cliente {
     private Ciudad ciudad;
 
     @ManyToOne
-    @JoinColumn(name = "id_direccion")
+    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion")
     private Direccion direccion;
-
+    
     @ManyToOne
-    @JoinColumn(name = "id_empleado_rep_ventas")
+    @JoinColumn(name = "id_empleado_rep_ventas", referencedColumnName = "id_empleado")
     private Empleado empleadoRepVentas;
 
     @Column(name = "limite_credito")
@@ -60,6 +63,14 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
+    public String getNombreContacto(){
+        return nombreContacto;
+    }
+
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+    
     public String getNombreCliente() {
         return nombreCliente;
     }
@@ -68,20 +79,20 @@ public class Cliente {
         this.nombreCliente = nombreCliente;
     }
 
-    public String getNombreContacto() {
-        return nombreContacto;
+    public String getApellidoCliente() {
+        return apellidoCliente;
     }
 
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
+    public void setApellidoCliente(String apellidoCliente) {
+        this.apellidoCliente = apellidoCliente;
     }
 
-    public String getApellidoContacto() {
-        return apellidoContacto;
+    public String getEmail() {
+        return email;
     }
 
-    public void setApellidoContacto(String apellidoContacto) {
-        this.apellidoContacto = apellidoContacto;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFax() {
@@ -137,8 +148,8 @@ public class Cliente {
     //     return "Cliente{" +
     //            "id_cliente=" + idCliente +
     //            ", nombre_cliente='" + nombreCliente + '\'' +
-    //            ", nombre_contacto='" + nombreContacto + '\'' +
-    //            ", apellido_contacto='" + apellidoContacto + '\'' +
+    //            ", nombre_Cliente='" + nombreCliente + '\'' +
+    //            ", apellido_Cliente='" + apellidoCliente + '\'' +
     //            ", fax='" + fax + '\'' +
     //            ", telefono='" + telefono + '\'' +
     //            ", ciudad=" + (ciudad != null ? ciudad.getIdCiudad() : null) +

@@ -10,7 +10,7 @@ public class EmpleadoDTO {
     private String apellido2;
     private String extension;
     private String email;
-    private String idOficina;
+    private Long idOficina;
     private Long idJefe;  
     private Long idPuesto; 
 
@@ -24,7 +24,7 @@ public class EmpleadoDTO {
         this.apellido2 = empleado.getApellido2();
         this.extension = empleado.getExtension();
         this.email = empleado.getEmail();
-        this.idOficina = empleado.getIdOficina();
+        this.idOficina = empleado.getOficina() != null ? empleado.getOficina().getIdOficina() : null;
         this.idJefe = empleado.getJefe() != null ? empleado.getJefe().getIdEmpleado() : null;
         this.idPuesto = empleado.getPuesto() != null ? empleado.getPuesto().getIdPuesto() : null;
     }
@@ -77,11 +77,11 @@ public class EmpleadoDTO {
         this.email = email;
     }
 
-    public String getIdOficina() {
+    public Long getIdOficina() {
         return idOficina;
     }
 
-    public void setIdOficina(String idOficina) {
+    public void setIdOficina(Long idOficina) {
         this.idOficina = idOficina;
     }
 

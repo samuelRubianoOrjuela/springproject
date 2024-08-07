@@ -33,8 +33,9 @@ public class Empleado {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "id_oficina")
-    private String idOficina;
+    @ManyToOne
+    @JoinColumn(name = "id_oficina")
+    private Oficina oficina;
 
     @ManyToOne
     @JoinColumn(name = "id_jefe")
@@ -43,7 +44,6 @@ public class Empleado {
     @ManyToOne
     @JoinColumn(name = "id_puesto")
     private Puesto puesto;
-
 
     public Empleado() {
     }
@@ -96,12 +96,12 @@ public class Empleado {
         this.email = email;
     }
 
-    public String getIdOficina() {
-        return idOficina;
+    public Oficina getOficina() {
+        return oficina;
     }
 
-    public void setIdOficina(String idOficina) {
-        this.idOficina = idOficina;
+    public void setOficina(Oficina oficina) {
+        this.oficina = oficina;
     }
 
     public Empleado getJefe() {
@@ -122,7 +122,8 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" + "id_empleado=" + idEmpleado + ", nombre='" + nombre + '\'' + ", apellido1='" + apellido1 + '\'' + ", apellido2='" + apellido2 + '\'' + ", extension='" + extension + '\'' + ", email='" + email + '\'' + ", id_oficina='" + idOficina + '\'' + ", jefe=" + (jefe != null ? jefe.getIdEmpleado() : null) + ", puesto=" + puesto +'}';
+        return "Empleado{" +"id_empleado=" + idEmpleado +", nombre='" + nombre + '\'' +", apellido1='" + apellido1 + '\'' +", apellido2='" + apellido2 + '\'' +", extension='" + extension + '\'' +", email='" + email + '\'' +", oficina=" + (oficina != null ? oficina.getIdOficina() : null) +", jefe=" + (jefe != null ? jefe.getIdEmpleado() : null) +", puesto=" + (puesto != null ? puesto.getIdPuesto() : null) +'}';
     }
 }
+
 
