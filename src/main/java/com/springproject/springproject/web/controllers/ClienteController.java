@@ -24,7 +24,6 @@ public class ClienteController {
     private final CiudadService ciudadService;
     private final EmpleadoService empleadoService;
     private final DireccionService direccionService;
-
     
     public ClienteController(ClienteService clienteService, CiudadService ciudadService, EmpleadoService empleadoService, DireccionService direccionService) {
         this.clienteService = clienteService;
@@ -39,12 +38,6 @@ public class ClienteController {
         List<ClienteDTO> clientesDTO = clientes.stream().map(cliente -> new ClienteDTO(cliente)).collect(Collectors.toList());
         return ResponseEntity.ok(clientesDTO);
     }
-
-    // @GetMapping("/formulario/{id}")
-    // public ResponseEntity<ClienteDTO> formulario(@PathVariable Long id) {
-    //     Optional<Cliente> cliente = clienteService.findById(id);
-    //     return cliente.map(c -> ResponseEntity.ok(new ClienteDTO(c))).orElseGet(() -> ResponseEntity.notFound().build());
-    // }
 
     @PostMapping("/nuevo")
     public ResponseEntity<Void> nuevoCliente(@RequestBody ClienteDTO clienteDTO) {
