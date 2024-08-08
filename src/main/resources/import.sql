@@ -49,3 +49,8 @@ INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, come
 
 INSERT INTO detalle_pedido (id_detalle_pedido, id_pedido, id_producto, cantidad, precio_unidad, numero_linea) VALUES (1, 1, 1, 1, 1200.00, 1);
 INSERT INTO detalle_pedido (id_detalle_pedido, id_pedido, id_producto, cantidad, precio_unidad, numero_linea) VALUES (2, 2, 2, 2, 150.00, 1);
+
+INSERT INTO roles (name) VALUES ('ROLE_USER');
+INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+
+INSERT INTO users (enable, username, password) VALUES (true, 'aaaa', 'aaaaa');
