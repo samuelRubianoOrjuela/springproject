@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -66,29 +67,34 @@ public class ClienteController {
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Void> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(id);
-        cliente.setNombreCliente(clienteDTO.getNombreCliente());
-        cliente.setNombreContacto(clienteDTO.getNombreContacto());
-        cliente.setApellidoCliente(clienteDTO.getApellidoCliente());
-        cliente.setEmail(clienteDTO.getEmail());
-        cliente.setFax(clienteDTO.getFax());
-        cliente.setTelefono(clienteDTO.getTelefono());
-        cliente.setLimiteCredito(clienteDTO.getLimiteCredito());
-        
-        if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() || 
-            direccionService.findById(clienteDTO.getDireccionId()).isEmpty() || 
-            empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).isEmpty()) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        Optional<Cliente> clienteOpt = clienteService.findById(id);
+        if (clienteOpt.isPresent()) {
+            Cliente cliente = clienteOpt.get();
+            cliente.setIdCliente(id);            
+
+            if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() || 
+                direccionService.findById(clienteDTO.getDireccionId()).isEmpty() || 
+                empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).isEmpty()) {
+                return ResponseEntity.badRequest().build();
+            }
+            cliente.setNombreCliente(clienteDTO.getNombreCliente());
+            cliente.setNombreContacto(clienteDTO.getNombreContacto());
+            cliente.setApellidoCliente(clienteDTO.getApellidoCliente());
+            cliente.setEmail(clienteDTO.getEmail());
+            cliente.setFax(clienteDTO.getFax());
+            cliente.setTelefono(clienteDTO.getTelefono());
+            cliente.setLimiteCredito(clienteDTO.getLimiteCredito());
+            cliente.setCiudad(ciudadService.findById(clienteDTO.getCiudadId()).get());
+            cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).get());
+            cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).get());
+    
+            Cliente clienteActualizado = clienteService.save(cliente);
+            return ResponseEntity.ok(new ClienteDTO(clienteActualizado));
+
+        } else {
+            return ResponseEntity.noContent().build();
         }
-
-        cliente.setCiudad(ciudadService.findById(clienteDTO.getCiudadId()).get());
-        cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).get());
-        cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).get());
-
-        clienteService.update(id, cliente);
-        return ResponseEntity.noContent().build();
     }
 
 
