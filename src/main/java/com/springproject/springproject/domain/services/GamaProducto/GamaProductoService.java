@@ -8,7 +8,7 @@ import com.springproject.springproject.persistence.entities.GamaProducto;
 public interface GamaProductoService {
 
     List<GamaProducto> findAll();
-    Optional<GamaProducto> findById(String id);
+    Optional<GamaProducto> findById(String gama);
     GamaProducto save(GamaProducto gamaProducto);
     GamaProducto update(String id, GamaProducto gamaProducto);
     Optional<GamaProducto> delete(String id);

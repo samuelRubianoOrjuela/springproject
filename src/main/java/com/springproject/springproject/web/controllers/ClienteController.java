@@ -40,10 +40,15 @@ public class ClienteController {
         return ResponseEntity.ok(clientesDTO);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteDTO> obtenerCiudad(@PathVariable Long id) {
+        Optional<Cliente> clientes = clienteService.findById(id);
+        return clientes.map(c -> ResponseEntity.ok(new ClienteDTO(c))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping("/nuevo")
-    public ResponseEntity<ClienteDTO> nuevoCliente(@RequestBody ClienteDTO clienteDTO) {
-        if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() || 
-            direccionService.findById(clienteDTO.getDireccionId()).isEmpty() ||
+    public ResponseEntity<Void> nuevoCliente(@RequestBody ClienteDTO clienteDTO) {
+        if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() ||
             empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
@@ -57,43 +62,40 @@ public class ClienteController {
         cliente.setFax(clienteDTO.getFax());
         cliente.setTelefono(clienteDTO.getTelefono());
         cliente.setLimiteCredito(clienteDTO.getLimiteCredito());
+
+
         cliente.setCiudad(ciudadService.findById(clienteDTO.getCiudadId()).orElse(null));
         cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).orElse(null));
         cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).orElse(null));
         
         clienteService.save(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ClienteDTO(cliente));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
-        Optional<Cliente> clienteOpt = clienteService.findById(id);
-        if (clienteOpt.isPresent()) {
-            Cliente cliente = clienteOpt.get();
-            cliente.setIdCliente(id);            
-
-            if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() || 
-                direccionService.findById(clienteDTO.getDireccionId()).isEmpty() || 
-                empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).isEmpty()) {
-                return ResponseEntity.badRequest().build();
-            }
-            cliente.setNombreCliente(clienteDTO.getNombreCliente());
-            cliente.setNombreContacto(clienteDTO.getNombreContacto());
-            cliente.setApellidoCliente(clienteDTO.getApellidoCliente());
-            cliente.setEmail(clienteDTO.getEmail());
-            cliente.setFax(clienteDTO.getFax());
-            cliente.setTelefono(clienteDTO.getTelefono());
-            cliente.setLimiteCredito(clienteDTO.getLimiteCredito());
-            cliente.setCiudad(ciudadService.findById(clienteDTO.getCiudadId()).get());
-            cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).get());
-            cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).get());
-    
-            Cliente clienteActualizado = clienteService.save(cliente);
-            return ResponseEntity.ok(new ClienteDTO(clienteActualizado));
-
-        } else {
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        Cliente cliente = new Cliente();
+        cliente.setIdCliente(id);
+        cliente.setNombreCliente(clienteDTO.getNombreCliente());
+        cliente.setNombreContacto(clienteDTO.getNombreContacto());
+        cliente.setApellidoCliente(clienteDTO.getApellidoCliente());
+        cliente.setEmail(clienteDTO.getEmail());
+        cliente.setFax(clienteDTO.getFax());
+        cliente.setTelefono(clienteDTO.getTelefono());
+        cliente.setLimiteCredito(clienteDTO.getLimiteCredito());
+        
+        if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() || 
+            direccionService.findById(clienteDTO.getDireccionId()).isEmpty() || 
+            empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).isEmpty()) {
+            return ResponseEntity.badRequest().build();
         }
+
+        cliente.setCiudad(ciudadService.findById(clienteDTO.getCiudadId()).get());
+        cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).get());
+        cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).get());
+
+        clienteService.update(id, cliente);
+        return ResponseEntity.noContent().build();
     }
 
 

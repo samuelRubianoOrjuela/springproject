@@ -38,8 +38,8 @@ INSERT INTO dimensiones (id_dimensiones, ancho, alto, largo) VALUES (2, 60.00, 4
 INSERT INTO producto (id_producto, nombre, gama, id_dimensiones, id_proveedor, descripcion, cantidad_en_stock, precio_venta, precio_proveedor) VALUES (1, 'Laptop', 'Electrónica', 1, 1, 'Laptop de última generación', 10, 1200.00, 1000.00);
 INSERT INTO producto (id_producto, nombre, gama, id_dimensiones, id_proveedor, descripcion, cantidad_en_stock, precio_venta, precio_proveedor) VALUES (2, 'Silla Oficina', 'Muebles', 2, 2, 'Silla ergonómica', 20, 150.00, 120.00);
 
-INSERT INTO stock (id_stock, id_producto, cantidad_en_stock) VALUES (1, 1, 10);
-INSERT INTO stock (id_stock, id_producto, cantidad_en_stock) VALUES (2, 2, 20);
+-- INSERT INTO stock (id_stock, id_producto, cantidad_en_stock) VALUES (1, 1, 10);
+-- INSERT INTO stock (id_stock, id_producto, cantidad_en_stock) VALUES (2, 2, 20);
 
 INSERT INTO pago (id_pago, id_cliente, id_forma_pago, fecha_pago, total) VALUES (1, 1, 1, '2024-08-01', 5000.00);
 INSERT INTO pago (id_pago, id_cliente, id_forma_pago, fecha_pago, total) VALUES (2, 2, 2, '2024-08-02', 15000.00);

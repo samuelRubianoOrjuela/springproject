@@ -1,6 +1,8 @@
 package com.springproject.springproject.persistence.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -16,6 +18,7 @@ import jakarta.persistence.JoinColumn;
 public class DetallePedido {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle_pedido")
     private Long idDetallePedido;
 

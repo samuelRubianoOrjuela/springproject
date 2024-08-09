@@ -11,6 +11,6 @@ public interface PagoService {
     Optional<Pago> findById(Long id);
     Pago save(Pago pago);
     Pago update(Long id, Pago pago);
-    Optional<Pago> delete(Long id);
+    void delete(Long id);
     
 }

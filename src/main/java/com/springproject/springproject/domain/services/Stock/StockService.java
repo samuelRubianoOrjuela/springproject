@@ -1,16 +1,16 @@
-package com.springproject.springproject.domain.services.Stock;
+// package com.springproject.springproject.domain.services.Stock;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import com.springproject.springproject.persistence.entities.Stock;
+// import com.springproject.springproject.persistence.entities.Stock;
 
-public interface StockService {
+// public interface StockService {
 
-    List<Stock> findAll();
-    Optional<Stock> findById(Long id);
-    Stock save(Stock stock);
-    Stock update(Long id, Stock stock);
-    Optional<Stock> delete(Long id);
+//     List<Stock> findAll();
+//     Optional<Stock> findById(Long id);
+//     Stock save(Stock stock);
+//     Stock update(Long id, Stock stock);
+//     Optional<Stock> delete(Long id);
     
-}
+// }

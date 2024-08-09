@@ -36,7 +36,7 @@ public class DimensionesController {
         return ResponseEntity.ok(dimensionesDTO);
     }
 
-    @GetMapping("/dimensiones/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DimensionesDTO> obtenerDimensiones(@PathVariable Long id) {
         Optional<Dimensiones> dimensiones = dimensionesService.findById(id);
         return dimensiones.map(p -> ResponseEntity.ok(new DimensionesDTO(p))).orElseGet(() -> ResponseEntity.notFound().build());

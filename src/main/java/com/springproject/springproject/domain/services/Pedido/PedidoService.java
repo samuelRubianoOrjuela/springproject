@@ -11,6 +11,6 @@ public interface PedidoService {
     Optional<Pedido> findById(Long id);
     Pedido save(Pedido pedido);
     Pedido update(Long id, Pedido pedido);
-    Optional<Pedido> delete(Long id);
+    void delete(Long id);
     
 }

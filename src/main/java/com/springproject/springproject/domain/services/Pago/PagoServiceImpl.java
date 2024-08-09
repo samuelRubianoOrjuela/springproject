@@ -12,12 +12,15 @@ import com.springproject.springproject.persistence.repositories.PagoRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class PagoServiceImpl implements PagoService{
+public class PagoServiceImpl implements PagoService {
 
     @Autowired
-    PagoRepository pagoRepository;
+    private final PagoRepository pagoRepository;
 
-    
+    public PagoServiceImpl(PagoRepository pagoRepository) {
+        this.pagoRepository = pagoRepository;
+    }
+
     @Override
     public List<Pago> findAll() {
         return pagoRepository.findAll();
@@ -32,22 +35,21 @@ public class PagoServiceImpl implements PagoService{
     public Pago save(Pago pago) {
         return pagoRepository.save(pago);
     }
-    
+
     @Override
     public Pago update(Long id, Pago pago) {
-        if(!pagoRepository.existsById(id)){
-            throw new EntityNotFoundException("Pago no encontrado con id:" + id);
+        if (!pagoRepository.existsById(id)) {
+            throw new EntityNotFoundException("Pago no encontrado con id: " + id);
         }
         pago.setIdPago(id);
         return pagoRepository.save(pago);
     }
-    
+
     @Override
-    public Optional<Pago> delete(Long id) {
-        Optional<Pago> pago = pagoRepository.findById(id);
-        if (pago.isPresent()) {
-            pagoRepository.deleteById(id);
+    public void delete(Long id) {
+        if (!pagoRepository.existsById(id)) {
+            throw new EntityNotFoundException("Pago no encontrado con id: " + id);
         }
-        return pago;
+        pagoRepository.deleteById(id);
     }
 }

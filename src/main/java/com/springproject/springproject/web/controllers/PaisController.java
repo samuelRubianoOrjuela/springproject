@@ -28,7 +28,7 @@ public class PaisController {
         return ResponseEntity.ok(paisesDTO);
     }
 
-    @GetMapping("/pais/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PaisDTO> obtenerPais(@PathVariable Long id) {
         Optional<Pais> pais = paisService.findById(id);
         return pais.map(p -> ResponseEntity.ok(new PaisDTO(p))).orElseGet(() -> ResponseEntity.notFound().build());

@@ -1,5 +1,5 @@
-package com.springproject.springproject.domain.services.Stock;
+// package com.springproject.springproject.domain.services.Stock;
 
-public class StockServiceImpl {
+// public class StockServiceImpl {
 
-}
+// }

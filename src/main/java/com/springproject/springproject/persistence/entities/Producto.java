@@ -1,6 +1,8 @@
 package com.springproject.springproject.persistence.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -16,6 +18,7 @@ import jakarta.persistence.JoinColumn;
 public class Producto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
 
@@ -38,7 +41,7 @@ public class Producto {
     private String descripcion;
 
     @Column(name = "cantidad_en_stock")
-    private int cantidadEnStock;
+    private Short cantidadEnStock;
 
     @Column(name = "precio_venta")
     private BigDecimal precioVenta;
@@ -97,11 +100,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getCantidadEnStock() {
+    public Short getCantidadEnStock() {
         return cantidadEnStock;
     }
 
-    public void setCantidadEnStock(int cantidadEnStock) {
+    public void setCantidadEnStock(Short cantidadEnStock) {
         this.cantidadEnStock = cantidadEnStock;
     }
 

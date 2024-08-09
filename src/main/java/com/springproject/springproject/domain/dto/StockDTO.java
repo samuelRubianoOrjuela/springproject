@@ -1,5 +1,5 @@
-package com.springproject.springproject.domain.dto;
+// package com.springproject.springproject.domain.dto;
 
-public class StockDTO {
+// public class StockDTO {
     
-}
+// }

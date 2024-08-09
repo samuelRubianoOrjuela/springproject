@@ -124,12 +124,12 @@ CREATE TABLE producto (
     CONSTRAINT FK_id_proveedor_producto FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
 );
 
-CREATE TABLE stock (
-    id_stock INT(11) PRIMARY KEY,
-    id_producto VARCHAR(15),
-    cantidad_en_stock SMALLINT(6),
-    CONSTRAINT FK_id_producto_stock FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
-);
+-- CREATE TABLE stock (
+--     id_stock INT(11) PRIMARY KEY,
+--     id_producto VARCHAR(15),
+--     cantidad_en_stock SMALLINT(6),
+--     CONSTRAINT FK_id_producto_stock FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+-- );
 
 CREATE TABLE estado_pedido (
     id_estado INT(11) PRIMARY KEY,
