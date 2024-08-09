@@ -47,7 +47,7 @@ public class ClienteController {
     }
 
     @PostMapping("/nuevo")
-    public ResponseEntity<Void> nuevoCliente(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<ClienteDTO> crearCliente(@RequestBody ClienteDTO clienteDTO) {
         if (ciudadService.findById(clienteDTO.getCiudadId()).isEmpty() ||
             empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -63,13 +63,12 @@ public class ClienteController {
         cliente.setTelefono(clienteDTO.getTelefono());
         cliente.setLimiteCredito(clienteDTO.getLimiteCredito());
 
-
         cliente.setCiudad(ciudadService.findById(clienteDTO.getCiudadId()).orElse(null));
         cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).orElse(null));
         cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).orElse(null));
         
-        clienteService.save(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Cliente nuevoCliente = clienteService.save(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ClienteDTO(nuevoCliente));
     }
 
     @PutMapping("/actualizar/{id}")
