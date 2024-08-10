@@ -101,7 +101,7 @@ INSERT INTO pago (id_pago, id_cliente, id_forma_pago, fecha_pago, total) VALUES 
 
 -- Tabla 'pedido'
 INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, comentarios, id_cliente, metodo_pago, id_pago, id_estado) VALUES (1, '2024-08-01', '2024-08-05', '2024-08-04', 'Pedido urgente', 1, 'Tarjeta de Credito', 1, 1);
-INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, comentarios, id_cliente, metodo_pago, id_pago, id_estado) VALUES (2, '2024-08-02', '2024-08-10', NULL, 'Pedido estandar', 2, 'Transferencia Bancaria', 2, 2);
+INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, comentarios, id_cliente, metodo_pago, id_pago, id_estado) VALUES (2, '2024-08-02', '2024-08-10', '2024-08-11', 'Pedido estandar', 2, 'Transferencia Bancaria', 2, 2);
 INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, comentarios, id_cliente, metodo_pago, id_pago, id_estado) VALUES (3, '2024-08-03', '2024-08-07', '2024-08-06', 'Pedido rapido', 3, 'Cheque', 3, 3);
 INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, comentarios, id_cliente, metodo_pago, id_pago, id_estado) VALUES (4, '2024-08-04', '2024-08-12', '2024-08-11', 'Pedido para oficina', 4, 'Efectivo', 4, 4);
 INSERT INTO pedido (id_pedido, fecha_pedido, fecha_esperada, fecha_entrega, comentarios, id_cliente, metodo_pago, id_pago, id_estado) VALUES (5, '2024-08-05', '2024-08-09', '2024-08-08', 'Pedido especial', 5, 'Pago Movil', 5, 5);

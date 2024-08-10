@@ -1,6 +1,7 @@
 package com.springproject.springproject.domain.services.Pedido;
 
 import com.springproject.springproject.persistence.entities.Pedido;
+import com.springproject.springproject.persistence.repositories.DetallePedidoRepository;
 import com.springproject.springproject.persistence.repositories.PedidoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +17,9 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    
+    @Autowired
+    private DetallePedidoRepository detallePedidoRepository;
 
     @Override
     public List<Pedido> findAll() {
@@ -46,6 +50,7 @@ public class PedidoServiceImpl implements PedidoService {
         if (!pedidoRepository.existsById(id)) {
             throw new EntityNotFoundException("Pedido no existe con id " + id);
         }
+        detallePedidoRepository.setPedidoNull(id);
         pedidoRepository.deleteById(id);
     }
 }

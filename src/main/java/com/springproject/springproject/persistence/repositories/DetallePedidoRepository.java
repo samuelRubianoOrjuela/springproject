@@ -16,5 +16,10 @@ public interface DetallePedidoRepository extends JpaRepository<DetallePedido, Lo
     @Transactional
     @Query("UPDATE DetallePedido d SET d.producto = NULL WHERE d.producto.idProducto = :idProducto")
     void setProductoNull(@Param("idProducto") Long idProducto);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE DetallePedido d SET d.pedido = NULL WHERE d.pedido.idPedido = :idPedido")
+    void setPedidoNull(@Param("idPedido") Long idPedido);
     
 }
