@@ -72,7 +72,8 @@ public class ClienteController {
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<Void> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        
         Cliente cliente = new Cliente();
         cliente.setIdCliente(id);
         cliente.setNombreCliente(clienteDTO.getNombreCliente());
@@ -93,8 +94,8 @@ public class ClienteController {
         cliente.setDireccion(direccionService.findById(clienteDTO.getDireccionId()).get());
         cliente.setEmpleadoRepVentas(empleadoService.findById(clienteDTO.getEmpleadoRepVentasId()).get());
 
-        clienteService.update(id, cliente);
-        return ResponseEntity.noContent().build();
+        Cliente clienteActualizado = clienteService.update(id, cliente);
+        return ResponseEntity.ok(new ClienteDTO(clienteActualizado));
     }
 
 

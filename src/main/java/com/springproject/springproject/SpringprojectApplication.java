@@ -20,6 +20,7 @@ public class SpringprojectApplication {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins(
                     "http://127.0.0.1:5501",
+                    "https://samuelrubianoorjuela.github.io",
                         "http://localhost:8080"
                         ).allowedMethods("*").allowedHeaders("*");
             }
