@@ -15,5 +15,10 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Transactional
     @Query("UPDATE Pedido p SET p.cliente = NULL WHERE p.cliente.idCliente = :id")
     void setClienteNullPedido(Long id);
+    
+    @Modifying
+    @Transactional
+    @Query("UPDATE Pedido p SET p.pago = NULL WHERE p.pago.idPago = :id")
+    void setPagoNullPedido(Long id);
 
 }

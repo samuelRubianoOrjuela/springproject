@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.springproject.springproject.persistence.entities.Pago;
 import com.springproject.springproject.persistence.repositories.PagoRepository;
+import com.springproject.springproject.persistence.repositories.PedidoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -16,9 +17,13 @@ public class PagoServiceImpl implements PagoService {
 
     @Autowired
     private final PagoRepository pagoRepository;
+    @Autowired
+    private final PedidoRepository pedidoRepository;
 
-    public PagoServiceImpl(PagoRepository pagoRepository) {
+    public PagoServiceImpl(PagoRepository pagoRepository, PedidoRepository pedidoRepository) {
         this.pagoRepository = pagoRepository;
+        this.pedidoRepository = pedidoRepository;
+
     }
 
     @Override
@@ -48,6 +53,7 @@ public class PagoServiceImpl implements PagoService {
     @Override
     public void delete(Long id) {
         if (!pagoRepository.existsById(id)) {
+            pedidoRepository.setPagoNullPedido(id);
             throw new EntityNotFoundException("Pago no encontrado con id: " + id);
         }
         pagoRepository.deleteById(id);

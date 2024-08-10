@@ -52,7 +52,7 @@ public class ProductoController {
         if (dimensionesService.findById(productoDTO.getIdDimensiones()).isEmpty() ||
             gamaProductoService.findById(productoDTO.getGama()).isEmpty() ||
             proveedorService.findById(productoDTO.getIdProveedor()).isEmpty()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().build();     
         }
     
         Producto producto = new Producto();
@@ -67,36 +67,39 @@ public class ProductoController {
         producto.setDimensiones(dimensionesService.findById(productoDTO.getIdDimensiones()).orElse(null));
         producto.setProveedor(proveedorService.findById(productoDTO.getIdProveedor()).orElse(null));
     
-        productoService.save(producto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Producto productoNuevo = productoService.save(producto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ProductoDTO(productoNuevo));
     }
     
 
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<ProductoDTO> actualizarProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
-        if (!productoService.findById(id).isPresent()) {
-            return ResponseEntity.notFound().build();
+        if (productoService.findById(id).isPresent()) {
+            if (dimensionesService.findById(productoDTO.getIdDimensiones()).isEmpty() ||
+                gamaProductoService.findById(productoDTO.getGama()).isEmpty() ||
+                proveedorService.findById(productoDTO.getIdProveedor()).isEmpty()) {
+                return ResponseEntity.badRequest().build();
+            }
+            Producto producto = new Producto();
+            producto.setIdProducto(id);
+            producto.setNombre(productoDTO.getNombre());
+            producto.setGamaProducto(gamaProductoService.findById(productoDTO.getGama()).orElse(null));
+            producto.setDimensiones(dimensionesService.findById(productoDTO.getIdDimensiones()).orElse(null));
+            producto.setProveedor(proveedorService.findById(productoDTO.getIdProveedor()).orElse(null));
+            producto.setDescripcion(productoDTO.getDescripcion());
+            producto.setPrecioVenta(productoDTO.getPrecioVenta());
+            producto.setPrecioProveedor(productoDTO.getPrecioProveedor());
+            producto.setCantidadEnStock(productoDTO.getCantidadEnStock());
+    
+            Producto productoActualizado = productoService.update(id, producto);
+            return ResponseEntity.ok(new ProductoDTO(productoActualizado));
+        } else {
+            return ResponseEntity.notFound().build();    
         }
 
-        if (dimensionesService.findById(productoDTO.getIdDimensiones()).isEmpty() ||
-            gamaProductoService.findById(productoDTO.getGama()).isEmpty() ||
-            proveedorService.findById(productoDTO.getIdProveedor()).isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
 
-        Producto producto = new Producto();
-        producto.setIdProducto(productoDTO.getIdProducto());
-        producto.setNombre(productoDTO.getNombre());
-        producto.setGamaProducto(gamaProductoService.findById(productoDTO.getGama()).orElse(null));
-        producto.setDimensiones(dimensionesService.findById(productoDTO.getIdDimensiones()).orElse(null));
-        producto.setProveedor(proveedorService.findById(productoDTO.getIdProveedor()).orElse(null));
-        producto.setDescripcion(productoDTO.getDescripcion());
-        producto.setPrecioVenta(productoDTO.getPrecioVenta());
-        producto.setPrecioProveedor(productoDTO.getPrecioProveedor());
-        producto.setCantidadEnStock(productoDTO.getCantidadEnStock());
 
-        productoService.update(id, producto);
-        return ResponseEntity.noContent().build();
+
     }
 
     @DeleteMapping("/eliminar/{id}")
