@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.transaction.annotation.Transactional;
 import com.springproject.springproject.domain.dto.PagoDTO;
 import com.springproject.springproject.domain.services.Cliente.ClienteService;
 import com.springproject.springproject.domain.services.FormaPago.FormaPagoService;
@@ -87,6 +88,7 @@ public class PagoController {
         return ResponseEntity.ok(new PagoDTO(pagoActualizado));
     }
 
+    @Transactional
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminarPago(@PathVariable Long id) {
         if (pagoService.findById(id).isPresent()) {

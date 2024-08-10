@@ -50,12 +50,13 @@ public class PagoServiceImpl implements PagoService {
         return pagoRepository.save(pago);
     }
 
+   
     @Override
     public void delete(Long id) {
         if (!pagoRepository.existsById(id)) {
-            pedidoRepository.setPagoNullPedido(id);
             throw new EntityNotFoundException("Pago no encontrado con id: " + id);
         }
+        pedidoRepository.setPagoNull(id);
         pagoRepository.deleteById(id);
     }
 }

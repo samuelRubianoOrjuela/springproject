@@ -3,6 +3,7 @@ package com.springproject.springproject.persistence.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +18,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     void setClienteNullPedido(Long id);
     
     @Modifying
-    @Transactional
-    @Query("UPDATE Pedido p SET p.pago = NULL WHERE p.pago.idPago = :id")
-    void setPagoNullPedido(Long id);
+    @Query("UPDATE Pedido p SET p.pago = NULL WHERE p.pago.id = :idPago")
+    void setPagoNull(@Param("idPago") Long idPago);
+
 
 }
