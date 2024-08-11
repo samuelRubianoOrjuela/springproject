@@ -1,4 +1,4 @@
-
+ALTER DATABASE db_empresa CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE pais (
     id_pais INT(5) PRIMARY KEY,

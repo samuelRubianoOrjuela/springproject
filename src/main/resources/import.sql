@@ -113,5 +113,5 @@ INSERT INTO detalle_pedido (id_detalle_pedido, id_pedido, id_producto, cantidad,
 INSERT INTO detalle_pedido (id_detalle_pedido, id_pedido, id_producto, cantidad, precio_unidad, numero_linea) VALUES (4, 4, 4, 50, 1.00, 1);
 INSERT INTO detalle_pedido (id_detalle_pedido, id_pedido, id_producto, cantidad, precio_unidad, numero_linea) VALUES (5, 5, 5, 3, 25.00, 1);
 
-
-INSERT INTO users (enable, username, password) VALUES (true, 'aaaa', 'aaaaa');
+INSERT INTO roles (name) VALUES ("ROLE_USER");
+INSERT INTO roles (name) VALUES ("ROLE_ADMIN");
